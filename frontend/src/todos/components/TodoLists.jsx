@@ -8,31 +8,27 @@ import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ReceiptIcon from '@material-ui/icons/Receipt'
 import Typography from '@material-ui/core/Typography'
 import { TodoListForm } from './TodoListForm'
+import axios from 'axios'
 
-const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
-
-const getPersonalTodos = () => {
-  return sleep(1000).then(() => Promise.resolve({
-    '0000000001': {
-      id: '0000000001',
-      title: 'First List',
-      todos: ['First todo of first list!']
-    },
-    '0000000002': {
-      id: '0000000002',
-      title: 'Second List',
-      todos: ['First todo of second list!']
-    }
-  }))
-}
 
 export const TodoLists = ({ style }) => {
   const [todoLists, setTodoLists] = useState({})
   const [activeList, setActiveList] = useState()
 
+  const retreiveTodos = () => {
+    axios.get('http://localhost:3001/retreiveTodos')
+    .then ((response) => {
+      setTodoLists(response.data);
+      console.log('List retrieved from server!')
+      console.log(response.data)
+    })
+    .catch(error => {console.error('Error while retrieving lists from server ' + error)})
+}
+
+
   useEffect(() => {
-    getPersonalTodos()
-      .then(setTodoLists)
+    retreiveTodos()
+      //.then(setTodoLists)
   }, [])
 
   if (!Object.keys(todoLists).length) return null
