@@ -28,33 +28,30 @@ const useStyles = makeStyles({
 export const TodoListForm = ({ todoList, saveTodoList }) => {
   const classes = useStyles()
   const [todos, setTodos] = useState(todoList.todos)
-
-  const handleSubmit = event => {
-    event.preventDefault()
-    saveTodoList(todoList.id, { todos })
-  }
-
+  
   return (
     <Card className={classes.card}>
       <CardContent>
         <Typography component='h2'>
           {todoList.title}
         </Typography>
-        <form onSubmit={handleSubmit} className={classes.form}>
-          {todos.map((name, index) => (
+        <form className={classes.form}>
+          {todos.map((todo, index) => (
             <div key={index} className={classes.todoLine}>
               <Typography className={classes.standardSpace} variant='h6'>
                 {index + 1}
               </Typography>
               <TextField
                 label='What to do?'
-                value={name}
+                value={todo}
                 onChange={event => {
-                  setTodos([ // immutable update
+                  const newTodos = [
                     ...todos.slice(0, index),
-                    event.target.value,
+                     event.target.value, 
                     ...todos.slice(index + 1)
-                  ])
+                  ]
+                  setTodos(newTodos)
+                  saveTodoList(todoList.id, newTodos)
                 }}
                 className={classes.textField}
               />
@@ -63,14 +60,16 @@ export const TodoListForm = ({ todoList, saveTodoList }) => {
                 color='secondary'
                 className={classes.standardSpace}
                 onClick={() => {
-                  const newInput = [
+                  const newTodos = [
                     ...todos.slice(0, index),
                     ...todos.slice(index + 1)
                   ]
-                  setTodos(newInput)
-                  saveTodoList(todoList.id, newInput)
+                  
+                  setTodos(newTodos)
+                  saveTodoList(todoList.id, newTodos)
+
                 }}
-              >
+                >
                 <DeleteIcon />
               </Button>
             </div>
@@ -84,9 +83,6 @@ export const TodoListForm = ({ todoList, saveTodoList }) => {
               }}
             >
               Add Todo <AddIcon />
-            </Button>
-            <Button type='submit' variant='contained' color='primary'>
-              Save
             </Button>
           </CardActions>
         </form>

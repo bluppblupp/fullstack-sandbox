@@ -15,12 +15,12 @@ let todoLists = {
   "0000000001": {
     id: "0000000001",
     title: "First List",
-    todos: ["First todo of first list"],
+    todos: ["First todo of first list", "En till todo"],
   },
   "0000000002": {
     id: "0000000002",
     title: "Second List",
-    todos: ["First todo of Second list", "next todo"],
+    todos: ["First todo of second list", "new todo"],
   },
 };
 
@@ -33,4 +33,6 @@ app.post("/postTodoLists", (req, res) => {
   const newInput = req.body;
   todoLists = newInput;
   res.sendStatus(201);
+  console.log("Postade listan efter send");
+  console.log(todoLists);
 });

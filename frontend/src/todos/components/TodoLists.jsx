@@ -11,7 +11,11 @@ import { TodoListForm } from './TodoListForm'
 import axios from 'axios'
 
 const postTodoLists = (newTodos) => {
-  axios.post('http://localhost:3001/postTodoLists', newTodos)
+  axios.post('http://localhost:3001/postTodoLists', newTodos, {
+    headers: {
+    'Content-Type': 'application/json',
+    }
+  })
   .then ((response) => {
     console.log('Sent to server: ', response.data)
         })
@@ -22,6 +26,7 @@ const postTodoLists = (newTodos) => {
 export const TodoLists = ({ style }) => {
   const [todoLists, setTodoLists] = useState({})
   const [activeList, setActiveList] = useState()
+
 
   const retreiveTodos = () => {
     axios.get('/retreiveTodoLists')
@@ -64,14 +69,13 @@ export const TodoLists = ({ style }) => {
     {todoLists[activeList] && <TodoListForm
       key={activeList} // use key to make React recreate component to reset internal state
       todoList={todoLists[activeList]}
-      saveTodoList={(id, { todos }) => {
+      saveTodoList={(id, todos ) => {
         const listToUpdate = todoLists[id]
         const newTodos = {
           ...todoLists,
           [id]: { ...listToUpdate, todos }
         }
         postTodoLists(newTodos)
-        console.log(newTodos)
         setTodoLists(newTodos)
         }}
     />}
