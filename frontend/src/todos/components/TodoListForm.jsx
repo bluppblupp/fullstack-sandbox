@@ -50,13 +50,11 @@ export const TodoListForm = ({ todoList, saveTodoList }) => {
                 label='What to do?'
                 value={name}
                 onChange={event => {
-                  const newInput = [
+                  setTodos([ // immutable update
                     ...todos.slice(0, index),
                     event.target.value,
                     ...todos.slice(index + 1)
-                  ]
-                  setTodos(newInput)
-                  saveTodoList(todoList.id, newInput)
+                  ])
                 }}
                 className={classes.textField}
               />
@@ -82,9 +80,7 @@ export const TodoListForm = ({ todoList, saveTodoList }) => {
               type='button'
               color='primary'
               onClick={() => {
-                const newInput = [...todos, '']
-                setTodos(newInput)
-                saveTodoList(todoList.id, newInput)
+                setTodos([...todos, ''])
               }}
             >
               Add Todo <AddIcon />
@@ -98,3 +94,4 @@ export const TodoListForm = ({ todoList, saveTodoList }) => {
     </Card>
   )
 }
+

@@ -10,13 +10,21 @@ import Typography from '@material-ui/core/Typography'
 import { TodoListForm } from './TodoListForm'
 import axios from 'axios'
 
+const postTodoLists = (newTodos) => {
+  axios.post('http://localhost:3001/postTodoLists', newTodos)
+  .then ((response) => {
+    console.log('Sent to server: ', response.data)
+        })
+  .catch(error => {console.error('Error while sending list to server ' + error.response.data)})
+}
+
 
 export const TodoLists = ({ style }) => {
   const [todoLists, setTodoLists] = useState({})
   const [activeList, setActiveList] = useState()
 
   const retreiveTodos = () => {
-    axios.get('http://localhost:3001/retreiveTodos')
+    axios.get('/retreiveTodoLists')
     .then ((response) => {
       setTodoLists(response.data);
       console.log('List retrieved from server!')
@@ -28,7 +36,6 @@ export const TodoLists = ({ style }) => {
 
   useEffect(() => {
     retreiveTodos()
-      //.then(setTodoLists)
   }, [])
 
   if (!Object.keys(todoLists).length) return null
@@ -59,11 +66,14 @@ export const TodoLists = ({ style }) => {
       todoList={todoLists[activeList]}
       saveTodoList={(id, { todos }) => {
         const listToUpdate = todoLists[id]
-        setTodoLists({
+        const newTodos = {
           ...todoLists,
           [id]: { ...listToUpdate, todos }
-        })
-      }}
+        }
+        postTodoLists(newTodos)
+        console.log(newTodos)
+        setTodoLists(newTodos)
+        }}
     />}
   </Fragment>
 }
