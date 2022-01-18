@@ -19,7 +19,7 @@ const postTodoLists = (newTodos) => {
   .then ((response) => {
     console.log('Sent to server: ', response.data)
         })
-  .catch(error => {console.error('Error while sending list to server ' + error.response.data)})
+  .catch(error => {console.error('Error while sending list to server ' + error.response)})
 }
 
 
@@ -46,9 +46,9 @@ export const TodoLists = ({ style }) => {
   if (!Object.keys(todoLists).length) return null
   return <Fragment>
     <Card style={style}>
-      <CardContent>
+      <CardContent align='center'>
         <Typography
-          component='h2'
+          component='h1' variant='h5'
         >
           My Todo Lists
         </Typography>
