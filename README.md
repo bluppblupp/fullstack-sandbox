@@ -32,11 +32,11 @@ If you feel constrained by time (which is totally fine!), prioritize quality ove
 
 ### Main Task
 
-[x] Persist the todo lists on the server. Persisting in a database is not required. (Simple js structures on the server is fine). If you do go for an actual DB (again not required), be sure to include instructions of how to get it up and running.
+- [x] Persist the todo lists on the server. Persisting in a database is not required. (Simple js structures on the server is fine). If you do go for an actual DB (again not required), be sure to include instructions of how to get it up and running.
 
 ### Additional tasks
 
-[x] Don't require users to press save when an item is added/edited in the todo list. (Autosave functionality)
-[x] Make it possible to indicate that a todo is completed.
-[x] Indicate that a todo list is completed if all todo items within are completed.
-[ ] Add a date for completion to todo items. Indicate how much time is remaining or overdue.
+- [x] Don't require users to press save when an item is added/edited in the todo list. (Autosave functionality) :tada:
+- [x] Make it possible to indicate that a todo is completed. :tada:
+- [x] Indicate that a todo list is completed if all todo items within are completed. :tada:
+- [ ] Add a date for completion to todo items. Indicate how much time is remaining or overdue.
