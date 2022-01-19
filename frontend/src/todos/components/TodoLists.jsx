@@ -48,7 +48,7 @@ export const TodoLists = ({ style }) => {
     <Card style={style}>
       <CardContent align='center'>
         <Typography
-          component='h1' variant='h5'
+          component='h1' variant='h5' gutterBottom
         >
           My Todo Lists
         </Typography>

@@ -34,7 +34,7 @@ export const TodoListForm = ({ todoList, saveTodoList }) => {
   return (
     <Card className={classes.card}>
       <CardContent>
-        <Typography component='h5' variant='h5'>
+        <Typography component='h5' variant='h5' align='center' gutterBottom>
           {todoList.title}
         </Typography>
         <form className={classes.form}>
@@ -42,6 +42,7 @@ export const TodoListForm = ({ todoList, saveTodoList }) => {
             <div key={index} className={classes.todoLine}>
               <Typography className={classes.standardSpace} variant='h6'>
                 {index + 1}
+                
         
               </Typography>
              
@@ -56,7 +57,7 @@ export const TodoListForm = ({ todoList, saveTodoList }) => {
                   ]
                   setTodos(newTodos)
                   saveTodoList(todoList.id, newTodos)
-                }}
+                                  }}
                 className={classes.textField}
               />
                <Tooltip title={todoitem.done ? 'Set todo as not completed' : 'Set todo as completed'}>
@@ -74,6 +75,7 @@ export const TodoListForm = ({ todoList, saveTodoList }) => {
                       }}
                   />
                </Tooltip>
+               <Tooltip title={'Delete todo'}>
               <Button
                 size='small'
                 color='secondary'
@@ -91,6 +93,7 @@ export const TodoListForm = ({ todoList, saveTodoList }) => {
                 >
                 <DeleteIcon />
               </Button>
+              </Tooltip>
             </div>
           ))}
           <CardActions>
