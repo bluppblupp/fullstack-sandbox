@@ -39,23 +39,21 @@ export const TodoListForm = ({ todoList, saveTodoList }) => {
         </Typography>
         <form className={classes.form}>
           {todos.map((todoitem, index) => (
-            <div key={index} className={classes.todoLine}>
-              <Typography className={classes.standardSpace} variant='h6'>
+            <div key={index} className={classes.todoLine} style={{ textDecoration : todoitem.done ? 'line-through' : 'none' }}>
+              <Typography className={classes.standardSpace} variant='h6' >
                 {index + 1}
-                
-        
               </Typography>
-             
               <TextField
                 label='What to do?'
                 value={todoitem.task}
-                onChange={event => {
+                onChange={event => { 
                   const newTodos = [
                     ...todos.slice(0, index),
                     {task: event.target.value, done: todos[index].done } , 
                     ...todos.slice(index + 1)
                   ]
-                  setTodos(newTodos)
+                  // updates with the new input
+                  setTodos(newTodos) 
                   saveTodoList(todoList.id, newTodos)
                                   }}
                 className={classes.textField}
@@ -63,14 +61,15 @@ export const TodoListForm = ({ todoList, saveTodoList }) => {
                <Tooltip title={todoitem.done ? 'Set todo as not completed' : 'Set todo as completed'}>
                <Checkbox
                       checked={todoitem.done}
-                      inputProps={{ 'aria-label': 'Checkbox ' } }
+                      inputProps={{ 'aria-label': 'Checkbox '} }
                       onChange={() => {
                         const newTodos = [
                           ...todos.slice(0, index),
                           {task: todos[index].task, done: !todos[index].done},
                           ...todos.slice(index + 1)
                         ]
-                        setTodos(newTodos) // immutable update
+                        // updates with the new input
+                        setTodos(newTodos) 
                         saveTodoList(todoList.id, newTodos)
                       }}
                   />
@@ -85,7 +84,7 @@ export const TodoListForm = ({ todoList, saveTodoList }) => {
                     ...todos.slice(0, index),
                     ...todos.slice(index + 1)
                   ]
-                  
+                  // updates with the new input
                   setTodos(newTodos)
                   saveTodoList(todoList.id, newTodos)
 

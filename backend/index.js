@@ -11,6 +11,23 @@ const PORT = 3001;
 
 app.listen(PORT, () => console.log(`TodoList app is running on ${PORT}!`));
 
+//GET REQUEST -- Sends the todoLists to the frontend
+
+app.get("/retreiveTodoLists", (req, res) => {
+  res.send(todoLists);
+  console.log("Retreived list:", todoLists);
+});
+
+// POST REQUEST -- Handles the request body and update todoLists
+
+app.post("/postTodoLists", (req, res) => {
+  const newInput = req.body;
+  todoLists = newInput;
+  res.sendStatus(201);
+});
+
+// Simple JSON for keeping todoLists
+
 let todoLists = {
   "0000000001": {
     id: "0000000001",
@@ -23,16 +40,3 @@ let todoLists = {
     todos: [{ task: "First todo of second list!", done: false }],
   },
 };
-
-app.get("/retreiveTodoLists", (req, res) => {
-  res.send(todoLists);
-  console.log("Hämtade listan innehåller", todoLists);
-});
-
-app.post("/postTodoLists", (req, res) => {
-  const newInput = req.body;
-  todoLists = newInput;
-  res.sendStatus(201);
-  console.log("Postade listan efter send");
-  console.log(todoLists);
-});

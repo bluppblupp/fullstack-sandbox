@@ -8,8 +8,20 @@ import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ReceiptIcon from '@material-ui/icons/Receipt'
 import Typography from '@material-ui/core/Typography'
 import { TodoListForm } from './TodoListForm'
+import CheckIcon from '@material-ui/icons/Check';
 import axios from 'axios'
 
+
+// Loop through the todolist and see if every task is done
+const todosCompleted  = (todos) => {
+     for (let i = 0; i < todos.length; i++) {
+      if (!todos[i].done)
+      return false
+  }
+  return true
+}
+
+// Posts the updated todolist
 const postTodoLists = (newTodos) => {
   axios.post('http://localhost:3001/postTodoLists', newTodos, {
     headers: {
@@ -62,6 +74,7 @@ export const TodoLists = ({ style }) => {
               <ReceiptIcon />
             </ListItemIcon>
             <ListItemText primary={todoLists[key].title} />
+            {todosCompleted (todoLists[key].todos) ? <CheckIcon /> : ''} 
           </ListItem>)}
         </List>
       </CardContent>
